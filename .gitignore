@@ -1,0 +1,7 @@
+/.vscode
+/bin
+/guess.py
+/guessmin.py
+/include
+/lib
+/pyvenv.cfg
