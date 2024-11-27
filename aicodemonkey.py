@@ -38,10 +38,17 @@ def clone(repo):
     # git clone https://<your-access-token>@gitlab.com/<namespace>/<repository>.git
 
 def extract_project_name(main_prompt):
-    response = generate(model='llama3.1', system='You are a helpful software developer. A coworker asks you to make a change to an certain project. What is the name of the project? You answer only with the name of the project and nothing else.', prompt=main_prompt)
+    response = generate(model='llama3.1', system='You are a helpful software developer. A coworker asks you to make some changes to a certain project. What is the name of the project? You answer only with the name of the project and nothing else.', prompt=main_prompt)
+    print(f">>> {response['response']}")
+    return response['response']
+
+def extract_tasks(main_prompt):
+    response = generate(model='llama3.1', system='You are a helpful software developer. A coworker asks you to make some changes to a certain project. What changes does the coworker want to make?', prompt=main_prompt)
+    print(f">>> {response['response']}")
     return response['response']
 
 if __name__ == "__main__":
     load_dotenv()
     project_name = extract_project_name(main_prompt=main_prompt)
     print(search_gitlab_projects(search_string=project_name))
+    print(extract_tasks(main_prompt=main_prompt))
